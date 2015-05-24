@@ -1,11 +1,32 @@
+//deep copy function for a generic object
+//===========================================================================
+function copy(to_copy) {
+//===========================================================================
+  var copy = Object.create(Object.getPrototypeOf(to_copy));
+  var propNames = Object.getOwnPropertyNames(to_copy);
+
+  propNames.forEach(function(name) {
+    var desc = Object.getOwnPropertyDescriptor(to_copy, name);
+    Object.defineProperty(copy, name, desc);
+  });
+  return copy;
+}
+/*
+var o1 = { a: 1, b: 2 };
+var o2 = copy(o1); // o2 looks like o1 now
+*/
+/*
 var values = {
 	name : "Robert",
 	age : 33
 };
 
 var oneValue = { name : "Zack" };
+*/
 
-function PrintValues(arg1) {
+//===========================================================================
+function printValues(arg1) {
+//===========================================================================
 	var content = "";
 
 	if (arg1.name.length > 0)
@@ -15,13 +36,15 @@ function PrintValues(arg1) {
 	return content;
 }
 
-function PrintProperty(object, propertyName) {
+//===========================================================================
+function printProperty(object, propertyName) {
+//===========================================================================
 	return object[propertyName];
 }
 
-
-/*
+//===========================================================================
 function createComparisonFunction(propertyName) {
+//===========================================================================
 	return function(object1, object2) {
 		var value1 = object1[propertyName];
 		var value2 = object2[propertyName];
@@ -35,17 +58,19 @@ function createComparisonFunction(propertyName) {
 		}
 	};
 }
-*/
 
-/*
+//===========================================================================
 function callSomeFunction(someFunction, someArgument) {
+//===========================================================================
 	return someFunction(someArgument);
 }
 
-function sum(num1) {
+//===========================================================================
+function add10(num1) {
+//===========================================================================
 	return num1 + 10;
 }
-
+/*
 var result1 = callSomeFunction(sum, 10);
 console.log(result1);
 */
