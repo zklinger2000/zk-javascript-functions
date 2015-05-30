@@ -1,3 +1,25 @@
+//jQuery method for generating HTML inside a div from server response
+$(document).ready(function () {
+  var url = '../data/employees.json';
+  $.getJSON(url, function (response) {
+    //create some HTML generated from the response
+    var statusHTML = '<ul class="bulleted">';
+    $.each(response, function (index, employee) {
+      if (employee.inoffice === true) {
+        statusHTML += '<li class="in">';
+      } else {
+        statusHTML += '<li class="out">';
+      }
+      //Adding the name as inner html for <li> and the closing tag
+      statusHTML += employee.name + '</li>';
+    });//END each loop
+    //closing the unordered list tag
+    statusHTML += '</ul>';
+    //add the final statusHTML string to the page at id='employeeList'
+    $('#employeeList').html(statusHTML);
+  });//END getJSON
+});//END ready
+
 //deep copy function for a generic object
 //===========================================================================
 function copy(to_copy) {
